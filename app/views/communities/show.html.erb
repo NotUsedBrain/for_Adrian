@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+  <p>
+    <strong>Name:</strong>
+    <%= @community.name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @community.description %>
+  </p>
+
+  <p>
+    <strong>Created by: <%= current_user.nickname %></strong>
+  </p>
+
+  <p><%= pluralize(@community.posts.count, 'Post') %></p><br>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  <% @community.posts.each do |post| %>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <%= render 'communities/posts/post', post: post %>
+          <%= link_to 'Edit', edit_community_path(@community) %>
+          <%= link_to 'Back', communities_path %>
+          <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

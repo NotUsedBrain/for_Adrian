@@ -1,0 +1,14 @@
+<%= form_for([@post.community, :communities, @post, @post.comments.build]) do |f| %>
+
+<div class="form-group col-md-3">
+  <%= f.label :body %>
+  <%= f.text_area :body, class:"form-control" %>
+</div>
+
+<br>
+
+<div>
+  <%= f.submit :Submit %>
+</div>
+
+<% end %>

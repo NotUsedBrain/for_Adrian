@@ -1,0 +1,27 @@
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @post.content %>
+</p>
+
+<h3> <%= @post.comments.count %> Comments </h3>
+     <% @post.comments.each do |comment| %>
+     <%= render 'communities/comments/comment', comment: comment %>
+     <% end %>
+     <h3> Add a Comment: </h3>
+     <%= render 'communities/comments/form' %>
+
+  <% pre_like = @post.likes.find { |like| like.user_id == current_user.id} %>
+  <% if pre_like %>
+  <%= button_to 'Unlike', post_like_path(@post, pre_like), method: :delete %>
+  <% else %>
+  <%= button_to 'Like', post_likes_path(@post), method: :post %>
+  <% end %>
+  <p><%= @post.likes.count %> <%= (@post.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+
+<%= link_to 'Edit', edit_community_communities_post_path(@post.community, @post) %> |
+<%= link_to 'Back', community_path(@post.community) %>
